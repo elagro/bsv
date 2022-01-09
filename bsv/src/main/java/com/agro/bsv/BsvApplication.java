@@ -1,8 +1,12 @@
 package com.agro.bsv;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -11,30 +15,39 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
+import com.agro.bsv.dao.exception.ContactoPersonaNoDefinidoException;
+import com.agro.bsv.dao.model.PersonaEntity;
+import com.agro.bsv.dao.model.enums.CountryCodeEnum;
+import com.agro.bsv.dao.model.enums.SexoEnum;
+import com.agro.bsv.dao.model.enums.TipoDocumentoEnum;
+import com.agro.bsv.dao.service.PersonaService;
+
+import lombok.extern.log4j.Log4j2;
+
 @SpringBootApplication
 //@EnableAutoConfiguration
 @EnableJpaAuditing
 @EntityScan({ "com.agro.*" })
 @ComponentScan({ "com.agro.*" })
-//@Log4j2
-public class BsvApplication //implements CommandLineRunner 
+@Log4j2
+public class BsvApplication implements CommandLineRunner 
 {
 
 	@Autowired(required = true)
-	//private PersonaService personaService;
+	private PersonaService personaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BsvApplication.class, args);
 
 	}
 
-	/*@Override
+	@Override
 	public void run(String... args) throws ContactoPersonaNoDefinidoException {
 
 		log.info("Inicio");
 
 		Boolean noUsar = false;
-		Boolean noUsar2 = false;
+		Boolean noUsar2 = true;
 
 		if (noUsar) {
 			PersonaEntity p1 = new PersonaEntity();
@@ -271,7 +284,7 @@ public class BsvApplication //implements CommandLineRunner
 			// log.info(personaService.findById(2L));
 		}
 	}
-*/
+
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonBuilder() {
 		Jackson2ObjectMapperBuilder b = new Jackson2ObjectMapperBuilder();

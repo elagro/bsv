@@ -35,6 +35,16 @@ public class PersonaController {
 	 * Devuelve lista de Personas
 	 * @return
 	 */
+	@GetMapping("/getHolaMundo")
+	private ResponseEntity<String> getHolaMundo() {
+		log.info("getHolaMundo");
+		return new ResponseEntity<String>("Hola Mundo", HttpStatus.OK);
+	}
+	
+	/**
+	 * Devuelve lista de Personas
+	 * @return
+	 */
 	@GetMapping("")
 	private ResponseEntity<List<PersonaDTO>> getPersonas() {
 		log.info("getPersonas");
@@ -87,10 +97,10 @@ public class PersonaController {
 	 * @throws NoExistePersonaException 
 	 */
 	@PutMapping("")
-	private ResponseEntity<PersonaEntity> update(@RequestBody PersonaDTO persona){
+	private ResponseEntity<PersonaDTO> update(@RequestBody PersonaDTO persona){
 		log.info("Update "+persona);
 
-		return new ResponseEntity<PersonaEntity>(personaService.update(getPersonEntity(persona) ), HttpStatus.OK);
+		return new ResponseEntity<PersonaDTO>( getPersonDTO(personaService.update(getPersonEntity(persona) )), HttpStatus.OK);
 	}
 
 	/**
