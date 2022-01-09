@@ -1,12 +1,8 @@
 package com.agro.bsv;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,37 +11,31 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
-import com.agro.bsv.dao.exception.ContactoPersonaNoDefinidoException;
-import com.agro.bsv.dao.model.PersonaEntity;
-import com.agro.bsv.dao.model.enums.CountryCodeEnum;
-import com.agro.bsv.dao.model.enums.SexoEnum;
-import com.agro.bsv.dao.model.enums.TipoDocumentoEnum;
-import com.agro.bsv.dao.service.PersonaService;
-
-import lombok.extern.log4j.Log4j2;
-
 @SpringBootApplication
 //@EnableAutoConfiguration
 @EnableJpaAuditing
 @EntityScan({ "com.agro.*" })
 @ComponentScan({ "com.agro.*" })
-@Log4j2
-public class BsvApplication implements CommandLineRunner {
+//@Log4j2
+public class BsvApplication //implements CommandLineRunner 
+{
 
 	@Autowired(required = true)
-	private PersonaService personaService;
+	//private PersonaService personaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BsvApplication.class, args);
 
 	}
 
-	@Override
+	/*@Override
 	public void run(String... args) throws ContactoPersonaNoDefinidoException {
 
 		log.info("Inicio");
 
 		Boolean noUsar = false;
+		Boolean noUsar2 = false;
+
 		if (noUsar) {
 			PersonaEntity p1 = new PersonaEntity();
 
@@ -203,82 +193,85 @@ public class BsvApplication implements CommandLineRunner {
 			personaService.save(p1);
 		}
 
-		////////////////////////////////////////////////////////////////////////////////////
 
-		PersonaEntity p2;
-
-		////////////////////////////////////////////////////////////
-		p2 = new PersonaEntity();
-		p2.setNombre("Lucas");
-		p2.setApellido("Agro");
-		p2.setTipoDocumento(TipoDocumentoEnum.DU);
-		p2.setNroDocumento("30333333");
-		p2.setNacionalidad(CountryCodeEnum.AR);
-		p2.setSexo(SexoEnum.M);
-		p2.setFechaNacimiento(LocalDate.of(1983, 10, 28));
-		p2.setNroTel("3333333333");
-		p2.setEmail("lucas@agro.com.ar");
-		PersonaEntity persLucas = personaService.save(p2);
-
-		////////////////////////////////////////////////////////////
-		p2 = new PersonaEntity();
-		p2.setNombre("Euge");
-		p2.setApellido("Agro");
-		p2.setTipoDocumento(TipoDocumentoEnum.DU);
-		p2.setNroDocumento("28333333");
-		p2.setNacionalidad(CountryCodeEnum.AR);
-		p2.setSexo(SexoEnum.F);
-		p2.setFechaNacimiento(LocalDate.of(1979, 03, 04));
-		p2.setNroTel("4444444444");
-		p2.setEmail("euge@agro.com.ar");
-		PersonaEntity persEuge = personaService.save(p2);
-
-		////////////////////////////////////////////////////////////
-		p2 = new PersonaEntity();
-		p2.setNombre("Antonio");
-		p2.setApellido("Agro");
-		p2.setTipoDocumento(TipoDocumentoEnum.DU);
-		p2.setNroDocumento("90111111");
-		p2.setNacionalidad(CountryCodeEnum.ES);
-		p2.setSexo(SexoEnum.M);
-		p2.setFechaNacimiento(LocalDate.of(1950, 4, 9));
-		p2.setNroTel("1111111111");
-		p2.setEmail("anto@agro.com.ar");
-		PersonaEntity persAnto = personaService.save(p2);
-
-		////////////////////////////////////////////////////////////
-		p2 = new PersonaEntity();
-		p2.setNombre("Bety");
-		p2.setApellido("Gamp");
-		p2.setTipoDocumento(TipoDocumentoEnum.DU);
-		p2.setNroDocumento("05222222");
-		p2.setNacionalidad(CountryCodeEnum.AR);
-		p2.setSexo(SexoEnum.F);
-		p2.setFechaNacimiento(LocalDate.of(1947, 9, 11));
-		p2.setNroTel("2222222222");
-		p2.setEmail("bety@gamp.com.ar");
-		PersonaEntity persBety = personaService.save(p2);
-
-		Set<PersonaEntity> hijosBetyAnto = new HashSet<PersonaEntity>();
-		hijosBetyAnto.add(persLucas);
-		hijosBetyAnto.add(persEuge);
-		persAnto.setChildren(hijosBetyAnto);
-		persBety.setChildren(hijosBetyAnto);
-
-		persLucas.setParent(persBety);
-		persEuge.setParent(persBety);
-
-		personaService.save(persEuge);
-		personaService.save(persLucas);
-		personaService.save(persAnto);
-		personaService.save(persBety);
-
-		// p1.setNroTel("1111");
-		// personaService.save(p1);
-		// personaService.deleteById(1L);
-		// log.info(personaService.findById(2L));
+		if (noUsar2) {
+			////////////////////////////////////////////////////////////////////////////////////
+	
+			PersonaEntity p2;
+	
+			////////////////////////////////////////////////////////////
+			p2 = new PersonaEntity();
+			p2.setNombre("Lucas");
+			p2.setApellido("Agro");
+			p2.setTipoDocumento(TipoDocumentoEnum.DU);
+			p2.setNroDocumento("30333333");
+			p2.setNacionalidad(CountryCodeEnum.AR);
+			p2.setSexo(SexoEnum.M);
+			p2.setFechaNacimiento(LocalDate.of(1983, 10, 28));
+			p2.setNroTel("3333333333");
+			p2.setEmail("lucas@agro.com.ar");
+			PersonaEntity persLucas = personaService.save(p2);
+	
+			////////////////////////////////////////////////////////////
+			p2 = new PersonaEntity();
+			p2.setNombre("Euge");
+			p2.setApellido("Agro");
+			p2.setTipoDocumento(TipoDocumentoEnum.DU);
+			p2.setNroDocumento("28333333");
+			p2.setNacionalidad(CountryCodeEnum.AR);
+			p2.setSexo(SexoEnum.F);
+			p2.setFechaNacimiento(LocalDate.of(1979, 03, 04));
+			p2.setNroTel("4444444444");
+			p2.setEmail("euge@agro.com.ar");
+			PersonaEntity persEuge = personaService.save(p2);
+	
+			////////////////////////////////////////////////////////////
+			p2 = new PersonaEntity();
+			p2.setNombre("Antonio");
+			p2.setApellido("Agro");
+			p2.setTipoDocumento(TipoDocumentoEnum.DU);
+			p2.setNroDocumento("90111111");
+			p2.setNacionalidad(CountryCodeEnum.ES);
+			p2.setSexo(SexoEnum.M);
+			p2.setFechaNacimiento(LocalDate.of(1950, 4, 9));
+			p2.setNroTel("1111111111");
+			p2.setEmail("anto@agro.com.ar");
+			PersonaEntity persAnto = personaService.save(p2);
+	
+			////////////////////////////////////////////////////////////
+			p2 = new PersonaEntity();
+			p2.setNombre("Bety");
+			p2.setApellido("Gamp");
+			p2.setTipoDocumento(TipoDocumentoEnum.DU);
+			p2.setNroDocumento("05222222");
+			p2.setNacionalidad(CountryCodeEnum.AR);
+			p2.setSexo(SexoEnum.F);
+			p2.setFechaNacimiento(LocalDate.of(1947, 9, 11));
+			p2.setNroTel("2222222222");
+			p2.setEmail("bety@gamp.com.ar");
+			PersonaEntity persBety = personaService.save(p2);
+	
+			Set<PersonaEntity> hijosBetyAnto = new HashSet<PersonaEntity>();
+			hijosBetyAnto.add(persLucas);
+			hijosBetyAnto.add(persEuge);
+			persAnto.setChildren(hijosBetyAnto);
+			persBety.setChildren(hijosBetyAnto);
+	
+			persLucas.setParent(persBety);
+			persEuge.setParent(persBety);
+	
+			personaService.save(persEuge);
+			personaService.save(persLucas);
+			personaService.save(persAnto);
+			personaService.save(persBety);
+	
+			// p1.setNroTel("1111");
+			// personaService.save(p1);
+			// personaService.deleteById(1L);
+			// log.info(personaService.findById(2L));
+		}
 	}
-
+*/
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonBuilder() {
 		Jackson2ObjectMapperBuilder b = new Jackson2ObjectMapperBuilder();
